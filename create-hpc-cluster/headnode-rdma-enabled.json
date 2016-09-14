@@ -91,7 +91,7 @@
         "osProfile": {
           "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminPassword": "[parameters('adminPassword')]",
 		  "windowsConfiguration": {
 				"winRM": {
 				  "listeners": [
