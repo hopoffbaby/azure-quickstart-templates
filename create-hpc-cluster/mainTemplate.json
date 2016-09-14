@@ -390,10 +390,10 @@
             "value": "[parameters('artifactsBaseUrl')]"
           },
 		  "keyVaultID": {
-            "value": "[trim(parameters('keyVaultID'))]"
+            "value": "[parameters('keyVaultID')]"
           },
           "winRMcertURL": {
-            "value": "[trim(parameters('winRMcertURL'))]"
+            "value": "[parameters('winRMcertURL')]"
           }
           "privateDomainName": {
             "value": "[parameters('privateDomainName')]"
