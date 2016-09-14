@@ -162,6 +162,18 @@
         "description": "Optional URL of a public available PowerShell script you want to run on the head node after it is configured. The script will be run as the Local System account. You can also specify arguments for the script, for example 'http://www.contoso.com/myhnpostscript.ps1 -Arg1 arg1 -Arg2 arg2'."
       }
     },
+	"winRMcertURL": {
+      "type": "string",
+      "metadata": {
+        "description": "URL of certificate in key vault in resource group to be used for remote powershell access to headnode"
+      }
+    },
+	"keyVaultID": {
+      "type": "string",
+      "metadata": {
+        "description": "Fully qualified ID for the key vault containing the certificates to be used for WinRM access to headnode"
+      }
+    },
     "computeNodePostConfigScript": {
       "type": "string",
       "defaultValue": "",
@@ -271,6 +283,12 @@
           },
           "computeNodePostConfigScript": {
             "value": "[trim(parameters('computeNodePostConfigScript'))]"
+		  },
+          "keyVaultID": {
+            "value": "[trim(parameters('keyVaultID'))]"
+          },
+          "winRMcertURL": {
+            "value": "[trim(parameters('winRMcertURL'))]"
           },
           "artifactsBaseUrl": {
             "value": "[variables('artifactsBaseUrl')]"

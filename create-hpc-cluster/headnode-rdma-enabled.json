@@ -56,6 +56,18 @@
         "description": "The base URI of the script"
       }
     },
+	"winRMcertURL": {
+      "type": "string",
+      "metadata": {
+        "description": "URL of certificate in key vault in resource group to be used for remote powershell access to headnode"
+      }
+    },
+	"keyVaultID": {
+      "type": "string",
+      "metadata": {
+        "description": "Fully qualified ID for the key vault containing the certificates to be used for WinRM access to headnode"
+      }
+    },
     "privateDomainName": {
       "type": "string",
       "metadata": {
@@ -80,6 +92,32 @@
           "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
+		  "windowsConfiguration": {
+				"winRM": {
+				  "listeners": [
+					{
+					  "protocol": "http"
+					},
+					{
+					  "protocol": "https",
+					  "certificateUrl": "[parameters('winRMcertURL')]"
+					}
+				  ]
+				},
+			},
+			"secrets": [
+				{
+				  "sourceVault": {
+					"id": "[parameters('keyVaultID')]"
+				  },
+				  "vaultCertificates": [
+					{
+					  "certificateUrl": "[parameters('winRMcertURL')]",
+					  "certificateStore": "My"
+					}
+				  ]
+				}
+			  ],
         },
         "storageProfile": {
           "imageReference": {
