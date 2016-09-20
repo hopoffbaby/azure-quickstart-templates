@@ -174,6 +174,18 @@
         "description": "Fully qualified ID for the key vault containing the certificates to be used for WinRM access to headnode"
       }
     },
+	"artifactsBaseUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "baseURL for json templates"
+      }
+    },
+	"sasKey": {
+      "type": "string",
+      "metadata": {
+        "description": "SAS key for accessing json templates in baseURL"
+      }
+    },
     "computeNodePostConfigScript": {
       "type": "string",
       "defaultValue": "",
@@ -200,8 +212,7 @@
         "sku": "2012R2CNExcel"
       }
     },
-    "currentComputeNodeImage": "[variables('computeNodeImages')[parameters('computeNodeImage')]]",
-    "artifactsBaseUrl": "https://raw.githubusercontent.com/hopoffbaby/azure-quickstart-templates/master/create-hpc-cluster"
+    "currentComputeNodeImage": "[variables('computeNodeImages')[parameters('computeNodeImage')]]"
   },
   "resources": [
     {
@@ -211,7 +222,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(variables('artifactsBaseUrl'), '/mainTemplate.json')]",
+          "uri": "[concat(parameters('artifactsBaseUrl'), '/mainTemplate.json', parameters('sasKey'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -290,8 +301,11 @@
           "winRMcertURL": {
             "value": "[parameters('winRMcertURL')]"
           },
+		  "sasKey": {
+            "value": "[parameters('sasKey')]"
+          },
           "artifactsBaseUrl": {
-            "value": "[variables('artifactsBaseUrl')]"
+            "value": "[parameters('artifactsBaseUrl')]"
           }
         }
       }

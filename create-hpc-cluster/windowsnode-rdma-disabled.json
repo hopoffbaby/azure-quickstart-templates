@@ -98,6 +98,12 @@
         "description": "The HPC cluster name"
       }
     },
+	"sasKey": {
+      "type": "string",
+      "metadata": {
+        "description": "sas key to download ps1 scripts"
+      }
+    },
     "privateDomainName": {
       "type": "string",
       "metadata": {
@@ -197,7 +203,7 @@
             "settings": {
               "wmfVersion": "4.0",
               "configuration": {
-                "url": "[concat(parameters('scriptBaseUri'),'/ConfigComputeNode.ps1.zip')]",
+                "url": "[concat(parameters('scriptBaseUri'),'/ConfigComputeNode.ps1.zip', parameters('sasKey'))]",
                 "script": "ConfigComputeNode.ps1",
                 "function": "ConfigComputeNode"
               },

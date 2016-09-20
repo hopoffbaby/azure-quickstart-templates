@@ -68,6 +68,12 @@
         "description": "The base URI of the script"
       }
     },
+	"sasKey": {
+      "type": "string",
+      "metadata": {
+        "description": "sas key to download ps1 scripts"
+      }
+    },
     "privateDomainName": {
       "type": "string",
       "metadata": {
@@ -169,7 +175,7 @@
             "settings": {
               "wmfVersion": "4.0",
               "configuration": {
-                "url": "[concat(parameters('scriptBaseUri'),'/CreateADPDC.ps1.zip')]",
+                "url": "[concat(parameters('scriptBaseUri'),'/CreateADPDC.ps1.zip', parameters('sasKey'))]",
                 "script": "CreateADPDC.ps1",
                 "function": "CreateADPDC"
               },
